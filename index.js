@@ -7,8 +7,8 @@ window.addEventListener("load", function () {
   class Particle {
     constructor(effect, x, y, color) {
       this.effect = effect;
-      this.x = x;
-      this.y = y;
+      this.x = 0;
+      this.y = 0;
       this.originX = Math.floor(x);
       this.originY = Math.floor(y);
       this.color = color;
@@ -17,6 +17,8 @@ window.addEventListener("load", function () {
       // v = velocity
       this.vx = Math.random() * 2 - Math.random() * 1;
       this.vy = Math.random() * 2 - Math.random() * 1;
+      // animation speed
+      this.ease = Math.random() * 0.1;
     }
     // draw rectangle
     draw(context) {
@@ -24,8 +26,8 @@ window.addEventListener("load", function () {
       context.fillRect(this.x, this.y, this.size, this.size);
     }
     update() {
-      this.x += this.vx;
-      this.y += this.vy;
+      this.x += (this.originX - this.x) * this.ease;
+      this.y += (this.originY - this.y) * this.ease;
     }
   }
 
@@ -40,7 +42,7 @@ window.addEventListener("load", function () {
       // how to make to center? half img width and height
       this.x = this.centerX - this.image.width * 0.5;
       this.y = this.centerY - this.image.height * 0.5;
-      this.gap = 15;
+      this.gap = 5;
     }
     init(context) {
       context.drawImage(this.image, this.x, this.y);
