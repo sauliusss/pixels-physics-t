@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
   class Particle {
     constructor(effect, x, y, color) {
       this.effect = effect;
-      this.x = 0;
+      this.x = Math.random() * this.effect.width;
       this.y = 0;
       this.originX = Math.floor(x);
       this.originY = Math.floor(y);
@@ -29,6 +29,11 @@ window.addEventListener("load", function () {
       this.x += (this.originX - this.x) * this.ease;
       this.y += (this.originY - this.y) * this.ease;
     }
+    warp() {
+      this.x = Math.random() * this.effect.width;
+      this.y = Math.random() * this.effect.height;
+      this.ease = 0.05;
+    }
   }
 
   class Effect {
@@ -40,8 +45,8 @@ window.addEventListener("load", function () {
       this.centerX = this.width * 0.5;
       this.centerY = this.height * 0.5;
       // how to make to center? half img width and height
-      this.x = this.centerX - this.image.width * 0.5;
-      this.y = this.centerY - this.image.height * 0.5;
+      this.x = 0;
+      this.y = 0;
       this.gap = 5;
     }
     init(context) {
@@ -68,6 +73,9 @@ window.addEventListener("load", function () {
     update() {
       this.particlesArray.forEach((particle) => particle.update());
     }
+    warp() {
+      this.particlesArray.forEach((particle) => particle.update());
+    }
   }
 
   const effect = new Effect(canvas.width, canvas.height);
@@ -80,4 +88,10 @@ window.addEventListener("load", function () {
     requestAnimationFrame(animate);
   }
   animate();
+
+  // warp button
+  const warpButton = this.document.querySelector("#warpButton");
+  warpButton.addEventListener("click", function () {
+    effect.warp;
+  });
 });
