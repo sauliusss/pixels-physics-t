@@ -51,7 +51,7 @@ window.addEventListener("load", function () {
     warp() {
       this.x = Math.random() * this.effect.width;
       this.y = Math.random() * this.effect.height;
-      this.ease = 0.5;
+      this.ease = 0.05;
     }
   }
 
@@ -102,7 +102,7 @@ window.addEventListener("load", function () {
       this.particlesArray.forEach((particle) => particle.update());
     }
     warp() {
-      this.particlesArray.forEach((particle) => particle.update());
+      this.particlesArray.forEach((particle) => particle.warp());
     }
   }
 
@@ -118,8 +118,8 @@ window.addEventListener("load", function () {
   animate();
 
   // warp button
-  const warpButton = this.document.querySelector("#warpButton");
+  const warpButton = document.getElementById("warpButton");
   warpButton.addEventListener("click", function () {
-    effect.warp;
+    effect.warp();
   });
 });
